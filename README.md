@@ -2,6 +2,8 @@
 
 > Your taste, roasted.
 
+![Receipt Roaster](docs/screenshot.png)
+
 Upload your Spotify Wrapped, Letterboxd, Goodreads — anything that exposes your taste — and an AI delivers a sharp, specific, slightly affectionate roast. Download it as a 1080×1350 image card and post the receipts.
 
 ## Stack
