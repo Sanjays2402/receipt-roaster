@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🪞 Receipt Roaster
 
-## Getting Started
+> Your taste, roasted.
 
-First, run the development server:
+Upload your Spotify Wrapped, Letterboxd, Goodreads — anything that exposes your taste — and an AI delivers a sharp, specific, slightly affectionate roast. Download it as a 1080×1350 image card and post the receipts.
+
+## Stack
+
+- Next.js 15 · App Router · TypeScript
+- Tailwind CSS v4 (CSS-first `@theme`)
+- OpenAI `gpt-4o` vision
+- `html-to-image` for PNG export
+- Framer Motion · lucide-react
+- Playfair Display · Plus Jakarta Sans · JetBrains Mono
+
+## Setup
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
+cp .env.example .env.local
+# add your OPENAI_API_KEY
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## How it works
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. You upload a screenshot.
+2. The image (as a data URL) is POSTed to `/api/roast`.
+3. The route hands the image to `gpt-4o` with a system prompt tuned for sharp, specific, redemptive roasts (see `src/lib/prompt.ts`).
+4. The model returns `{ roast, vibe }` as JSON.
+5. The result renders in the UI; an offscreen card at 1080×1350 is rasterized to PNG via `html-to-image` for download.
 
-## Learn More
+## Out of scope (v0.1)
 
-To learn more about Next.js, take a look at the following resources:
+- Auth, accounts, persistence, history
+- Social platform sharing beyond Web Share API
+- Analytics / rate limiting
+- i18n
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
